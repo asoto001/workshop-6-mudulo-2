@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Burger from "../Burger/Burger";
+import Burger from "../burger/Burger";
 import ControlPanel from "../ControlPanel/ControlPanel";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import './style.scss'
 
 // Actions
 const confirmBurger = (price) => ({
@@ -56,23 +57,22 @@ class Builder extends Component {
 
     render() {
         return (
-            <div className="container">
-                <ControlPanel
-                    onAdd={(x) => {
-                        this.addIngredient(x);
-                    }}
-                />
+            <section className="container">
+
                 <h3># Burgers added: {this.props.burgersArray.length}</h3>
                 <h2>
                     Burger {this.props.burgersArray.length + 1} : ${" "}
                     {this.getPrice()}
                 </h2>
-                <div className="button" onClick={() => this.handleConfirm()}>
-                    Confirm
+
+                <div className="container__btns">
+                    <ControlPanel
+                        onAdd={(x) => {
+                            this.addIngredient(x);
+                        }}
+                    />
                 </div>
-                <Link to="/receipt">
-                    <div className="button">See receipt</div>
-                </Link>
+                
                 <div className="builder">
                     <Burger
                         ingredients={this.state.ingredients}
@@ -81,7 +81,16 @@ class Builder extends Component {
                         }
                     />
                 </div>
-            </div>
+
+                <section className="container__comfirm-btn">
+                    <div className="button" onClick={() => this.handleConfirm()}>
+                        Confirm
+                    </div>
+                    <Link to="/receipt" style={{ textDecoration: 'none' }}>
+                        <div className="button">See receipt</div>
+                    </Link>
+                </section>
+            </section>
         );
     }
 }

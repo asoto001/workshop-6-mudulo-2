@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import Ingredient from "../Ingredient/Ingredient";
 
-const Burger = () => {
-  return (
-    <div>Burger</div>
-  )
-}
+const Burger = (props) => {
+    const burgerIngredients = props.ingredients.map((ingredient, index) => (
+        <Ingredient
+            key={index}
+            id={ingredient}
+            onClick={() => props.onIngredientClick(index)}
+        />
+    ));
 
-export default Burger
+    return (
+        <div className="burger">
+            <Ingredient id="bread-top" />
+            {burgerIngredients}
+            <Ingredient id="bread-bottom" />
+        </div>
+    );
+};
+
+export default Burger;
